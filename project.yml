@@ -1,0 +1,38 @@
+# XcodeGen spec for SubTrack — a local-only iOS subscription & bill tracker.
+# Regenerate the .xcodeproj any time with:  xcodegen generate
+name: SubTrack
+
+options:
+  # Match the frozen target: iOS 18 minimum, indie bundle id.
+  bundleIdPrefix: com.substrack
+  deploymentTarget:
+    iOS: "18.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    # Swift 5 language mode keeps SwiftData @Model ergonomics simple for a
+    # learning developer; the toolchain (Swift 6.3) still compiles it fine.
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+
+targets:
+  SubTrack:
+    type: application
+    platform: iOS
+    deploymentTarget: "18.0"
+    sources:
+      # Everything under SubTrack/ (models, views, persistence, assets).
+      - path: SubTrack
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.substrack.app
+        # XcodeGen auto-synthesizes the Info.plist for us; these keys feed it.
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        TARGETED_DEVICE_FAMILY: "1,2"
+        CODE_SIGNING_ALLOWED: NO
