@@ -120,9 +120,11 @@ struct HomeView: View {
                     .accessibilityLabel("Add subscription")
                 }
             }
-            // TODO: replace with the real AddEditSubscriptionView once it exists.
+            // The real Add flow: both the "+" button and the empty-state CTA
+            // flip showingAddSheet true, presenting AddEditSubscriptionView in
+            // add mode (no subscriptionToEdit).
             .sheet(isPresented: $showingAddSheet) {
-                AddSubscriptionPlaceholderView()
+                AddEditSubscriptionView()
             }
         }
     }
@@ -160,30 +162,6 @@ struct HomeView: View {
         for index in offsets {
             let subscription = sortedSubscriptions[index]
             modelContext.delete(subscription)
-        }
-    }
-}
-
-// Temporary stand-in for the Add screen so the "+" flow works and compiles.
-// TODO: delete this and present the real AddEditSubscriptionView.
-private struct AddSubscriptionPlaceholderView: View {
-    @Environment(\.dismiss) private var dismiss
-
-    var body: some View {
-        NavigationStack {
-            ContentUnavailableView(
-                "Add subscription",
-                systemImage: "plus.circle",
-                description: Text("Coming soon")
-            )
-            .navigationTitle("New Subscription")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Done") { dismiss() }
-                        .accessibilityLabel("Dismiss add subscription")
-                }
-            }
         }
     }
 }

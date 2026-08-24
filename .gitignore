@@ -5,8 +5,8 @@ build/
 xcuserdata/
 *.moved-aside
 
-# XcodeGen generates this from project.yml — keep the spec, not the output
-SubTrack.xcodeproj/
+# XcodeGen generates these from project.yml — keep the spec, not the output
+*.xcodeproj/
 
 # macOS
 .DS_Store
